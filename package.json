@@ -2,6 +2,11 @@
   "name": "react-hook-figlet",
   "version": "1.0.0",
   "description": "React custom hook for figlet.js",
+  "keywords": [
+    "react",
+    "react-hooks",
+    "figlet"
+  ],
   "author": "gongo",
   "license": "MIT",
   "repository": "gongo/react-hook-figlet",
