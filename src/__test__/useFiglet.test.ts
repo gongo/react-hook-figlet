@@ -1,29 +1,73 @@
-import { useFiglet } from './'
-import { act, renderHook } from '@testing-library/react-hooks'
+import { Fonts } from 'figlet'
+import { useFiglet } from '../'
+import { RenderHookResult, act, renderHook } from '@testing-library/react-hooks'
 
-// mock timer using jest
-jest.useFakeTimers()
+describe('useFiglet', () => {
+  let hook: RenderHookResult<unknown, [string, (text: string) => void, (font: Fonts) => void]>
 
-describe('useMyHook', () => {
-  it('updates every second', () => {
-    const { result } = renderHook(() => useFiglet())
+  beforeEach(async () => {
+    // For the first run of useEffect()
+    await act(async () => {
+      hook = renderHook(() => useFiglet())
+      await hook.waitForNextUpdate()
+    })
+  })
 
-    expect(result.current).toBe(0)
+  it('update figlet text', async () => {
+    expect(hook.result.current[0]).toBe('')
 
-    // Fast-forward 1sec
     act(() => {
-      jest.advanceTimersByTime(1000)
+      hook.result.current[1]('1')
     })
 
-    // Check after total 1 sec
-    expect(result.current).toBe(1)
+    expect(hook.result.current[0]).toBe(`\
+  _ 
+ / |
+ | |
+ | |
+ |_|
+    `)
 
-    // Fast-forward 1 more sec
     act(() => {
-      jest.advanceTimersByTime(1000)
+      hook.result.current[1]('2')
     })
 
-    // Check after total 2 sec
-    expect(result.current).toBe(2)
+    expect(hook.result.current[0]).toBe(`\
+  ____  
+ |___ \\ 
+   __) |
+  / __/ 
+ |_____|
+        `)
+  })
+
+  it('update figlet font', async () => {
+    expect(hook.result.current[0]).toBe('')
+
+    act(() => {
+      hook.result.current[1]('1')
+    })
+
+    expect(hook.result.current[0]).toBe(`\
+  _ 
+ / |
+ | |
+ | |
+ |_|
+    `)
+
+    await act(async () => {
+      hook.result.current[2]('Old Banner')
+      await hook.waitForNextUpdate()
+    })
+
+    expect(hook.result.current[0]).toBe(`\
+   #   
+  ##   
+ # #   
+   #   
+   #   
+   #   
+ ##### `)
   })
 })
