@@ -54,5 +54,10 @@
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "tslib": "^2.0.1",
     "typescript": "^4.3.2"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!figlet/importable-fonts)"
+    ]
   }
 }
