@@ -1,4 +1,4 @@
-import { useMyHook } from './'
+import { useFiglet } from './'
 import { act, renderHook } from '@testing-library/react-hooks'
 
 // mock timer using jest
@@ -6,7 +6,7 @@ jest.useFakeTimers()
 
 describe('useMyHook', () => {
   it('updates every second', () => {
-    const { result } = renderHook(() => useMyHook())
+    const { result } = renderHook(() => useFiglet())
 
     expect(result.current).toBe(0)
 
