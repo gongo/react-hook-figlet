@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
 import figlet, { Fonts } from 'figlet'
 
+export type FigletFont = Fonts
+
 type FontLoadStatus = {
-  [fontName in Fonts]: boolean
+  [fontName in FigletFont]: boolean
 }
 
-export function useFiglet(initialFont?: Fonts): [string, (text: string) => void, (font: Fonts) => void] {
+export function useFiglet(initialFont: FigletFont = 'Standard'): [string, (text: string) => void, (font: FigletFont) => void] {
   const [sourceText, setSourceText] = useState<string>('')
   const [figletText, setFigletText] = useState<string>('')
-  const [font, setFont] = useState<Fonts>(initialFont || 'Standard')
+  const [font, setFont] = useState<FigletFont>(initialFont)
   const [fontLoadStatus, setFontLoadStatus] = useState<FontLoadStatus>({ [font]: false } as FontLoadStatus)
 
   useEffect(() => {

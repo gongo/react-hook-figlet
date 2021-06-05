@@ -1,9 +1,8 @@
-import { Fonts } from 'figlet'
-import { useFiglet } from '../'
+import { useFiglet, FigletFont } from '../'
 import { RenderHookResult, act, renderHook } from '@testing-library/react-hooks'
 
 describe('useFiglet', () => {
-  let hook: RenderHookResult<unknown, [string, (text: string) => void, (font: Fonts) => void]>
+  let hook: RenderHookResult<unknown, [string, (text: string) => void, (font: FigletFont) => void]>
 
   beforeEach(async () => {
     // For the first run of useEffect()
