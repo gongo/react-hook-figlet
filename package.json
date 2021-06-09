@@ -1,6 +1,6 @@
 {
   "name": "react-hook-figlet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React custom hook for figlet.js",
   "keywords": [
     "react",
